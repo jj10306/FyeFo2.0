@@ -1,3 +1,14 @@
+# IDE data
+.idea/
+
+# Python specific files/dirs
+venv/
+.DS_Store
+__pycache__
+*.pyc
+
+# Default Node .gitignore
+
 # Logs
 logs
 *.log
