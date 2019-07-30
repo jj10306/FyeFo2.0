@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from data_init import data_dict, hash_city
 
 app = Flask(__name__)
-
+CORS(app)
 
 """
 API route to be hit by client w/ gtid as the request param
@@ -12,7 +13,7 @@ Returns -
 If an error occurred, the returned object will have a 'Error Message' property 
 If no error occurred, the returned object will be of the for { 'name': __insert_name_here__, 'role': 'student' || 'ta' }
 """
-@app.route('/')
+@app.route('/', methods = ["POST"])
 def index():
 
     # attempt to extract the 'gtid' request param and hash it
@@ -22,7 +23,7 @@ def index():
     except KeyError:
         return jsonify({"ErrorMessage":
                        "No request param 'gtid' found",
-                   "Status Code": 400
+                   "status": 400
                    })
 
     # attempt access the data_dict w/ the given gtid
@@ -31,7 +32,7 @@ def index():
     except KeyError:
         payload = {"ErrorMessage":
                        "GTID not found in class roster",
-                   "Status Code": 400
+                   "status": 400
                    }
 
     return jsonify(payload)
