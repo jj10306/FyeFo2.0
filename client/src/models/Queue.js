@@ -20,7 +20,7 @@ class Queue {
             return "Queue is empty!"
         }
         const returned = this.arr[this.front]
-        if (this.size == 1) {
+        if (this.size === 1) {
             this.clear();
             return returned;
         }

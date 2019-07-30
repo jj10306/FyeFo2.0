@@ -23,9 +23,18 @@ function App() {
           if (res.data.status === 200) {
             const name = res.data.name;
             if (res.data.role === "Ta") {
+              setUser(name);
+              let flag = false;
+              for (let i = 0; i < taList.length; i++) {
+                if (taList[i].name === name) {
+                  flag = true;
+                  break;
+                }
+              }
+              if (!flag) {
                 taList.push({name, time: Date.now()});
                 setTaList(taList);
-                setUser(name);
+              }
             } else {
               if (queue.size !== queue.CAPACITY) {
                 if (queue.contains(name)) {
@@ -54,7 +63,7 @@ function App() {
     switch(op) {
       case "RemoveNext":
         const student = queue.dequeue();
-        if (queue.size == 0) {
+        if (queue.size === 0) {
           setQueue(queue);
           setCount(taList.length);
           setTotalHelped(0);
