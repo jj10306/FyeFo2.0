@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import Queue from './models/Queue'
 
 import './App.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 import TitleBar from "./components/TitleBar"
 import Card from "./components/Card"
@@ -34,24 +36,27 @@ function App() {
               if (!flag) {
                 taList.push({name, time: Date.now()});
                 setTaList(taList);
+                toast_success(name + " is on duty!");
+              } else {
+                toast_success("Hello," + name + "!");
               }
             } else {
               if (queue.size !== queue.CAPACITY) {
                 if (queue.contains(name)) {
-                  setErr("You're already in the queue!");
-                  console.log("In queue already");
+                  toast_error("You're already in the queue, " + name + "!");
                 } else {
                   queue.enqueue({name, time: Date.now()});
                   setQueue(queue);
-                  setUser("General")
+                  setUser("General");
+                  toast_success("You've been added to the queue, " + name);
                 }
               } else {
-                setErr("Queue is full :(")
+                toast_error("Queue is full :(");
               }
             }
             setCount(count => count + 1); //work around to activate re-render
           } else {
-            setErr(res.data.ErrorMessage);
+            toast_error(res.data.ErrorMessage);
           }
         })
         .catch(err => console.log(err));
@@ -64,6 +69,7 @@ function App() {
       case "RemoveNext":
         const student = queue.dequeue();
         if (queue.size === 0) {
+          queue.clear()
           setQueue(queue);
           setCount(taList.length);
           setTotalHelped(0);
@@ -73,13 +79,19 @@ function App() {
           setTotalHelped(totalHelped => totalHelped + 1);
           setTotalWait(totalWait => totalWait + timeElapsed);
         }
+        if (student.name) {
+          toast_error("Bye, " + student.name);
+        }
         break;
       case "ClearQueue":
-        queue.clear();
-        setQueue(queue);
-        setCount(taList.length);
-        setTotalHelped(0);
-        setTotalWait(0);
+        if (queue.size) {
+          queue.clear();
+          setQueue(queue);
+          setCount(taList.length);
+          setTotalHelped(0);
+          setTotalWait(0);
+          toast_error("Queue has been cleared!");
+        }
         break;
       case "Exit":
         setUser("General");
@@ -89,14 +101,47 @@ function App() {
         setTaList(newTaList);
         setUser("General");
         setCount(count => count - 1);
+        toast_error(ta + " is now off duty!");
         break;
       default:
         console.log("default")
     }
   }
-  
+  const toast_error = msg => {
+    toast.error(msg, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      });
+  }
+
+  const toast_success= msg => {
+    toast.success(msg, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      });
+  }
+
   return (
       <>
+        <ToastContainer
+          position="top-right"
+          autoClose={1500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
         <TitleBar avgWait={(totalWait / totalHelped).toFixed(2)} />
         <div className="cards-container">
           <Card className={"queue-container"} title={"Queue"}>
