@@ -40,8 +40,9 @@ h1,h2 {
     width: 49%;
     height: 70vh;
     border-radius: 25px;
+    overflow: auto;
+    text-align: center;
     h1 {
-      text-align: center;
       margin-top: 10px;
       margin-bottom: 10px;
     }
@@ -50,5 +51,30 @@ h1,h2 {
     width: 90%;
     border-top: 2px darkgray solid;
     margin: 0 auto;
+  }
+}
+.input-container {
+  display: flex;
+  margin-top: 25px;
+  .text-container {
+    width: 25%;
+    text-align: center;
+    font-size: 80%;
+    height: 5vh;
+  }
+  button,
+  button:hover,
+  button:visited,
+  button:focus {
+    background-color: #F6F6F6;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 2px 3px gray;
+    outline: none;
+    margin: 5px;
+    cursor: pointer;
+  }
+  .button:active {
+    box-shadow: none;
   }
 }
