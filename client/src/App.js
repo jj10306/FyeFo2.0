@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import TitleBar from "./components/TitleBar"
 import Card from "./components/Card"
 import Input from "./components/Input"
+import TaContent from "./components/TaContent";
 
 function App() {
   const [queue, setQueue] = useState(new Queue());
@@ -19,26 +20,33 @@ function App() {
   const [err, setErr] = useState("");
   const [user, setUser] = useState("General");
 
+  console.log(count);
+
   const getInfo = gtid => {
       axios.post("http://localhost:5000/?gtid=" + gtid)
         .then(res => {
           if (res.data.status === 200) {
             const name = res.data.name;
             if (res.data.role === "Ta") {
-              setUser(name);
-              let flag = false;
-              for (let i = 0; i < taList.length; i++) {
-                if (taList[i].name === name) {
-                  flag = true;
+              let onDuty = false;
+              for (let ta of taList) {
+                if (ta.name === name) {
+                  onDuty = true;
                   break;
                 }
               }
-              if (!flag) {
+              if (!onDuty) {
+                setUser(name);
                 taList.push({name, time: Date.now()});
                 setTaList(taList);
-                toast_success(name + " is on duty!");
+                if (taList.length > 4) {
+                  toast_error("Too many TAs signed in, please remove all that are no longer on duty!");
+                } else {
+                  toast_success(name + " is on duty!");
+                }
               } else {
-                toast_success("Hello," + name + "!");
+                setUser(name);
+                toast_success("Hello, " + name + "!");
               }
             } else {
               if (queue.size !== queue.CAPACITY) {
@@ -97,15 +105,21 @@ function App() {
         setUser("General");
         break;
       case "SignOut":
-        const newTaList = taList.filter((element) => element.name !== ta);
-        setTaList(newTaList);
+        removeTa(ta);
         setUser("General");
-        setCount(count => count - 1);
         toast_error(ta + " is now off duty!");
         break;
       default:
         console.log("default")
     }
+  }
+  const removeTa = ta => {
+    setTaList(taList.filter(element => element.name !== ta));
+    setCount(count => count - 1);
+  }
+  const signOutTa = ta => {
+    setUser("General");
+    toast_error(ta + " is now off duty!");
   }
   const toast_error = msg => {
     toast.error(msg, {
@@ -147,8 +161,19 @@ function App() {
           <Card className={"queue-container"} title={"Queue"}>
             {queue.asArray().map((student, index) => <p key={student.time}>{(index + 1) + ") " + student.name}</p>)}
           </Card>
-          <Card className={"ta-container"} title={"TAs on Duty"}>
-            {taList.map((ta, index)=> <p key={ta.time}>{(index + 1) + ") " + ta.name}</p>)}
+          <Card className={"tas-container"} title={"TAs on Duty"}>
+            {
+              taList.map((ta, index) =>
+                  index < 4
+                ? <TaContent
+                      key={ta.time}
+                      name={ta.name}
+                      user={user}
+                      removeTa={removeTa}
+                      signOutTa={signOutTa} />
+                : null )
+            }
+            {/*{taList.map((ta, index)=> <TaContent key={ta.time} name={ta.name} user={user} removeTa={removeTa} /> )}*/}
           </Card>
         </div>
         <Input 

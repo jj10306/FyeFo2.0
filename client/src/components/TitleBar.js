@@ -8,7 +8,7 @@ const TitleBar = (props) => {
                 <h2>Average Wait Time: {isNaN(props.avgWait) ? 0 : props.avgWait}</h2>
             </div>
             <div className="logo-container">
-                <img src="./gt-logo.png" alt="GT Logo"/>
+                <img src="./images/gt-logo.png" alt="GT Logo"/>
             </div>
         </div>
     );

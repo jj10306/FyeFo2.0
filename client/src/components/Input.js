@@ -23,12 +23,12 @@ const Input = (props) => {
                     autoFocus
                     />
                 :
-                    <>
-                    <button onClick={props.handleButtonChange} value="RemoveNext">Remove Next</button>
-                    <button onClick={props.handleButtonChange} value="ClearQueue">Clear Queue</button>
-                    <button onClick={props.handleButtonChange} value="Exit">Exit</button>
-                    <button onClick={props.handleButtonChange} value={"SignOut " + props.user}>Sign Out</button>
-                    </>
+                    <div className={"button-container"}>
+                        <button onClick={props.handleButtonChange} value="RemoveNext">Remove Next</button>
+                        <button onClick={props.handleButtonChange} value="ClearQueue">Clear Queue</button>
+                        <button onClick={props.handleButtonChange} value="Exit">Exit</button>
+                        {/*<button onClick={props.handleButtonChange} value={"SignOut " + props.user}>Sign Out</button>*/}
+                    </div>
             }
 
         </div>
