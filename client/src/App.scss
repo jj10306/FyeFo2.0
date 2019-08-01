@@ -41,7 +41,6 @@ h1,h2 {
     width: 49%;
     height: 70vh;
     border-radius: 25px;
-    overflow: auto;
     text-align: center;
     h1 {
       margin-top: 10px;
@@ -49,11 +48,19 @@ h1,h2 {
     }
   }
   .content-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
     width: 90%;
     border-top: 2px darkgray solid;
     padding-top: 20px;
     margin: 0 auto;
     height: 80%;
+    p {
+      margin: 5px;
+      font-size: 25px;
+    }
   }
 }
 .input-container {
@@ -62,7 +69,7 @@ h1,h2 {
   .text-container {
     width: 25%;
     text-align: center;
-    font-size: 80%;
+    font-size: 0.9vw;
     height: 5vh;
   }
 

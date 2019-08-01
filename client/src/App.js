@@ -17,7 +17,6 @@ function App() {
   const [totalWait, setTotalWait] = useState(0);
   const [totalHelped, setTotalHelped] = useState(0);
   const [count, setCount] = useState(0);
-  const [err, setErr] = useState("");
   const [user, setUser] = useState("General");
 
   console.log(count);
@@ -40,7 +39,7 @@ function App() {
                 taList.push({name, time: Date.now()});
                 setTaList(taList);
                 if (taList.length > 4) {
-                  toast_error("Too many TAs signed in, please remove all that are no longer on duty!");
+                  toast_error(`Hello, ${name}. Please remove all TAs that are no longer on duty!`, 3000);
                 } else {
                   toast_success(name + " is on duty!");
                 }
@@ -121,10 +120,10 @@ function App() {
     setUser("General");
     toast_error(ta + " is now off duty!");
   }
-  const toast_error = msg => {
+  const toast_error = ( msg , time = 2000) => {
     toast.error(msg, {
       position: "top-right",
-      autoClose: 2000,
+      autoClose: time,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

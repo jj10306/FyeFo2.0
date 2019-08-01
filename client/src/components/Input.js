@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 
-const Input = (props) => {
+const areEqual = (prev, next) => {
+    return  prev.user === next.user; 
+}
+
+const Input =  React.memo((props) => {
     const [gtid, setGTID] = useState("");
     const handleChange = e => {
         const newGTID = e.target.value
@@ -33,6 +37,6 @@ const Input = (props) => {
 
         </div>
     );
-}
+}, areEqual);
 
 export default Input;
