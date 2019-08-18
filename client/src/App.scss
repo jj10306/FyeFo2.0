@@ -95,6 +95,7 @@ h1,h2 {
 .tas-container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-around;
   justify-items: space-around;
 }
@@ -102,6 +103,7 @@ h1,h2 {
   height: 200px;
   width: 200px;
   position: relative;
+  //overflow: scroll;
   svg {
     position: absolute;
     top: 0;
@@ -121,6 +123,9 @@ h1,h2 {
   }
   p {
     font-weight: bold;
+    white-space: nowrap;
+    overflow: scroll;
+    //font-size: 1rem;
   }
 }
 

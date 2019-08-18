@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import Queue from './models/Queue'
@@ -10,6 +10,7 @@ import TitleBar from "./components/TitleBar"
 import Card from "./components/Card"
 import Input from "./components/Input"
 import TaContent from "./components/TaContent";
+import {timeout} from "q";
 
 function App() {
   const [queue, setQueue] = useState(new Queue());
@@ -18,6 +19,26 @@ function App() {
   const [totalHelped, setTotalHelped] = useState(0);
   const [count, setCount] = useState(0);
   const [user, setUser] = useState("General");
+
+  // useEffect(() => {
+  //   debugger;
+  //   if (!queue.size) {
+  //     for (let i = 1; i < 16; i++) queue.enqueue({name: `Test Student #${i}`, time: Date.now()})
+  //     setCount(15);
+  //   }
+  //     });
+
+  //this hook is to auto sign-out a TA after being dormant for 20s
+  useEffect(() => {
+    let numSecondsBeforeTimeout = 5;
+    let timeOut;
+    if (user !== "General") {
+      timeOut = setTimeout(() => setUser("General"), numSecondsBeforeTimeout * 1000);
+    }
+    return () => {
+      return timeOut ? clearTimeout(timeOut) : null;
+    }
+  });
 
   console.log(count);
 
@@ -141,7 +162,6 @@ function App() {
       draggable: true,
       });
   }
-
   return (
       <>
         <ToastContainer

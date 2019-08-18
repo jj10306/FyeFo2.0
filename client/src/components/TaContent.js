@@ -17,7 +17,7 @@ const TaContent = ({ name, user, removeTa, signOutTa }) => {
                 <img src={imageSrc} />
                 {/*<img src={imageSrc} onerror="this.src='./images/python_logo.png';" alt="Missing Image"/>*/}
             </div>
-            <p>{name}</p>
+            <p>{name.split(' ')[0]}</p>
         </div>
 
     );
