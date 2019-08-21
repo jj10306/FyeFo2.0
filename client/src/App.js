@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import Queue from './models/Queue'
 
-import './App.scss';
+import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import TitleBar from "./components/TitleBar"
