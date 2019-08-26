@@ -24,9 +24,12 @@ def format_data():
     roster.write("Name, GTID, Role\n")
     for line in student_lines:
         line = line.strip().split(",")
-        name, gtid, role = line[0], line[2], line[5]
+        name, gtid, role = line[0], line[1], line[2]
+        name_parts = name.split("}")
+        first = name_parts[1].split()[0].strip()
+        last = name_parts[0].strip()
+        name =  "{} {}".format(first, last)
         hashed_gtid = hash_city(gtid)
         roster.write("{}, {}, {}\n".format(name, hashed_gtid, role))
     roster.close()
-
 format_data()

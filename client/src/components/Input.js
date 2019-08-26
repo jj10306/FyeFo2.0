@@ -23,7 +23,7 @@ const Input =  React.memo((props) => {
                     className="text-container"
                     onChange={handleChange}
                     value={gtid} 
-                    placeholder= "Scan Buzzcard or type GTID (e.g 903721301)"
+                    placeholder= "Scan Buzzcard or type GTID (e.g 903271301)"
                     autoFocus
                     />
                 :
