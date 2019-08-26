@@ -30,5 +30,4 @@ def format_data():
         hashed_gtid = hash_city(gtid)
         roster.write("{}, {}, {}\n".format(name, hashed_gtid, role))
     roster.close()
-
 format_data()
