@@ -9,8 +9,7 @@ const TaContent = ({ name, user, removeTa, signOutTa }) => {
         <div className={"ta-content-container"}>
             <div className="image-container">
                 { user !== "General" && <TiDelete onClick={() => { //consider making distinction based on signOutMe vs signOutOther and handling logic of toast based on that
-                    removeTa(name)
-                    if (name === user) signOutTa(name)
+                    signOutTa(name)
                 }
 
                 } /> }
