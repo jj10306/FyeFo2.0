@@ -21,7 +21,7 @@ def data_scrape():
 
         #this line may need to change depending on CSV format
         name, gtid, role = line.split(",")
-
+        gtid = gtid.strip()
         # last = last.strip('"').strip()
         # first = first.strip('"').strip()
 
