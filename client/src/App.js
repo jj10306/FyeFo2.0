@@ -47,7 +47,7 @@ function App() {
         .then(res => {
           if (res.data.status === 200) {
             const name = res.data.name;
-            if (res.data.role === "Ta") {
+            if (res.data.role.trim() === "Ta") {
               let onDuty = false;
               for (let ta of taList) {
                 if (ta.name === name) {
