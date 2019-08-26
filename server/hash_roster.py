@@ -26,7 +26,9 @@ def format_data():
         line = line.strip().split(",")
         name, gtid, role = line[0], line[1], line[2]
         name_parts = name.split("}")
-        name = name_parts[1].split()[0] + " " + name_parts[0]
+        first = name_parts[1].split()[0].strip()
+        last = name_parts[0].strip()
+        name =  "{} {}".format(first, last)
         hashed_gtid = hash_city(gtid)
         roster.write("{}, {}, {}\n".format(name, hashed_gtid, role))
     roster.close()

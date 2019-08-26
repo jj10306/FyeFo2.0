@@ -125,7 +125,6 @@ function App() {
         setUser("General");
         break;
       case "SignOut":
-        removeTa(ta);
         setUser("General");
         toast_error(ta + " is now off duty!");
         break;
@@ -133,12 +132,10 @@ function App() {
         console.log("default")
     }
   }
-  const removeTa = ta => {
-    setTaList(taList.filter(element => element.name !== ta));
-    setCount(count => count - 1);
-  }
   const signOutTa = ta => {
     setUser("General");
+    setTaList(taList.filter(element => element.name !== ta));
+    setCount(count => count - 1);
     toast_error(ta + " is now off duty!");
   }
   const toast_error = ( msg , time = 2000) => {
@@ -188,7 +185,6 @@ function App() {
                       key={ta.time}
                       name={ta.name}
                       user={user}
-                      removeTa={removeTa}
                       signOutTa={signOutTa} />
                 : null )
             }
