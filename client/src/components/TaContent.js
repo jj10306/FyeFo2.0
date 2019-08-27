@@ -8,13 +8,14 @@ const TaContent = ({ name, user, removeTa, signOutTa }) => {
     return (
         <div className={"ta-content-container"}>
             <div className="image-container">
-                { user !== "General" && <TiDelete onClick={() => { //consider making distinction based on signOutMe vs signOutOther and handling logic of toast based on that
-                    signOutTa(name)
+                { user !== "General" ? 
+                    <>
+                    <TiDelete onClick={() => {  signOutTa(name)}}/> 
+                    <img src={imageSrc} onClick={() => {  signOutTa(name)}}/>
+                    </>
+                :
+                    <img src={imageSrc} />
                 }
-
-                } /> }
-                <img src={imageSrc} />
-                {/*<img src={imageSrc} onerror="this.src='./images/python_logo.png';" alt="Missing Image"/>*/}
             </div>
             <p>{name.split(' ')[0]}</p>
         </div>
