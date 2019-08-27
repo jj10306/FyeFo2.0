@@ -30,7 +30,7 @@ function App() {
 
   //this hook is to auto sign-out a TA after being dormant for 20s
   useEffect(() => {
-    let numSecondsBeforeTimeout = 5;
+    let numSecondsBeforeTimeout = 12;
     let timeOut;
     if (user !== "General") {
       timeOut = setTimeout(() => setUser("General"), numSecondsBeforeTimeout * 1000);
