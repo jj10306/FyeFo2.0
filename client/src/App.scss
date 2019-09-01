@@ -1,3 +1,12 @@
+$header-color: #000000;
+$subheader-color: #A9A9A9;
+$card-background: #F7F8F9;
+$shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+$button-background: #006FCF;
+$button-hover: #0064BB;
+$button-color: #ECEDEE;
+
+
 h1,
 h2 {
   margin: 0;
@@ -16,7 +25,7 @@ h2 {
     justify-content: space-evenly;
 
     h2 {
-      color: darkgray;
+      color: $subheader-color;
       font-weight: normal;
     }
 
@@ -41,8 +50,8 @@ h2 {
   justify-content: space-between;
 
   .card-container {
-    background-color: #F7F8F9;
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    background-color: $card-background;
+    box-shadow: $shadow;
     width: 49%;
     height: 70vh;
     border-radius: 25px;
@@ -60,7 +69,7 @@ h2 {
     flex-wrap: wrap;
     align-content: space-around;
     width: 90%;
-    border-top: 2px darkgray solid;
+    border-top: 2px $subheader-color solid;
     padding-top: 20px;
     margin: 0 auto;
     height: 80%;
@@ -87,8 +96,8 @@ h2 {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: 20px;
-    background-color: #006FCF;
-    color: #ECEDEE;
+    background-color: $button-background;
+    color: $button-color;
     padding: 15px 30px;
     border-radius: 5px;
     margin: 5px;
@@ -99,8 +108,8 @@ h2 {
 
   button:hover {
     //transform: scale(1.02);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-    background-color: #0064bb;
+    box-shadow: $shadow;
+    background-color: $button-hover;
   }
 }
 
@@ -135,7 +144,7 @@ h2 {
       height: 100%;
       width: 100%;
       border-radius: 50%;
-      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: $shadow;
       object-fit: cover;
     }
   }
