@@ -1,6 +1,6 @@
 class Queue {
     constructor() {
-        this.CAPACITY = 25;
+        this.CAPACITY = 3;
         this.arr = new Array(this.CAPACITY);
         this.arr.fill(null);
         this.front = 0;
@@ -33,7 +33,7 @@ class Queue {
         return this.size;
     }
     clear() {
-        this.CAPACITY = 25;
+        this.CAPACITY = 3;
         this.arr = new Array(this.CAPACITY);
         this.arr.fill(null);
         this.front = 0;
@@ -43,25 +43,21 @@ class Queue {
         this.totalHelped = 0;
     }
     contains(name) {
-        for (let i = this.front; i < this.back; i++) {
-            if (name === this.arr[i].name) {
+        let pos = this.front;
+        for (let i = 0; i < this.size; i++) {
+            if (name.trim() === this.arr[pos].name.trim()) {
                 return true;
             }
+            pos = (pos + 1) % this.CAPACITY;
         }
         return false;
     }
     asArray() {
         let array = []
-        if (this.size === this.CAPACITY) {
-            let pos = this.front;
-            for (let i = 0; i < this.CAPACITY; i++) {
-                array.push(this.arr[pos])
-                pos = (pos + 1) % this.CAPACITY;
-            }
-        } else {
-            for (let i = this.front; i < this.back; i++) {
-                array.push(this.arr[i])
-            }
+        let pos = this.front;
+        for (let i = 0; i < this.size; i++) {
+            array.push(this.arr[pos])
+            pos = (pos + 1) % this.CAPACITY;
         }
         return array;
     }

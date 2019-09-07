@@ -10,7 +10,6 @@ import TitleBar from "./components/TitleBar"
 import Card from "./components/Card"
 import Input from "./components/Input"
 import TaContent from "./components/TaContent";
-import {timeout} from "q";
 
 function App() {
   const [queue, setQueue] = useState(new Queue());
@@ -20,15 +19,6 @@ function App() {
   const [count, setCount] = useState(0);
   const [user, setUser] = useState("General");
 
-  // useEffect(() => {
-  //   debugger;
-  //   if (!queue.size) {
-  //     for (let i = 1; i < 16; i++) queue.enqueue({name: `Test Student #${i}`, time: Date.now()})
-  //     setCount(15);
-  //   }
-  //     });
-
-  //this hook is to auto sign-out a TA after being dormant for 20s
   useEffect(() => {
     let numSecondsBeforeTimeout = 12;
     let timeOut;
@@ -95,19 +85,12 @@ function App() {
     ta = ta.join(" ");
     switch(op) {
       case "RemoveNext":
-        const student = queue.dequeue();
-        if (queue.size === 0) {
-          queue.clear()
+        if (queue.size !== 0) {
+          const student = queue.dequeue();
           setQueue(queue);
-          setCount(taList.length);
-          setTotalHelped(0);
-          setTotalWait(0);
-        } else {
           const timeElapsed = ((Date.now() - student.time) / 1000) / 60 ;
           setTotalHelped(totalHelped => totalHelped + 1);
           setTotalWait(totalWait => totalWait + timeElapsed);
-        }
-        if (student.name) {
           toast_error("Bye, " + student.name);
         }
         break;
