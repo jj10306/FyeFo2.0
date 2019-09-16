@@ -112,16 +112,11 @@ function App() {
       case "Exit":
         setUser("General");
         break;
-      case "SignOut":
-        setUser("General");
-        toast_error(ta + " is now off duty!");
-        break;
       default:
         console.log("default")
     }
   }
   const signOutTa = ta => {
-    setUser("General");
     setTaList(taList.filter(element => element.name !== ta));
     setCount(count => count - 1);
     toast_error(ta + " is now off duty!");
