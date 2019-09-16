@@ -85,13 +85,18 @@ function App() {
     ta = ta.join(" ");
     switch(op) {
       case "RemoveNext":
-        if (queue.size !== 0) {
+        if (queue.size) {
           const student = queue.dequeue();
           setQueue(queue);
-          const timeElapsed = ((Date.now() - student.time) / 1000) / 60 ;
-          setTotalHelped(totalHelped => totalHelped + 1);
-          setTotalWait(totalWait => totalWait + timeElapsed);
           toast_error("Bye, " + student.name);
+          if (queue.size) {
+            const timeElapsed = ((Date.now() - student.time) / 1000) / 60 ;
+            setTotalHelped(totalHelped => totalHelped + 1);
+            setTotalWait(totalWait => totalWait + timeElapsed);
+          } else {
+            setTotalHelped(0);
+            setTotalWait(0);
+          }
         }
         break;
       case "ClearQueue":

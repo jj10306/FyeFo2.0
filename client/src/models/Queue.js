@@ -1,6 +1,6 @@
 class Queue {
     constructor() {
-        this.CAPACITY = 3;
+        this.CAPACITY = 25;
         this.arr = new Array(this.CAPACITY);
         this.arr.fill(null);
         this.front = 0;
@@ -33,7 +33,7 @@ class Queue {
         return this.size;
     }
     clear() {
-        this.CAPACITY = 3;
+        this.CAPACITY = 25;
         this.arr = new Array(this.CAPACITY);
         this.arr.fill(null);
         this.front = 0;
